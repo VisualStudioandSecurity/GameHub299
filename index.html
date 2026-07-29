@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meu Friv - Jogos Instantâneos</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background-color: #0f111a; color: #fff; font-family: Arial, sans-serif; padding: 20px; }
+
+    h1 { text-align: center; margin-bottom: 20px; color: #ff0055; }
+
+    /* Grade de Jogos Estilo Friv */
+    .game-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+      gap: 10px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* Card do Jogo */
+    .game-card {
+      width: 100%;
+      aspect-ratio: 1;
+      border-radius: 8px;
+      overflow: hidden;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+
+    .game-card:hover {
+      transform: scale(1.08);
+      border-color: #ff0055;
+      z-index: 2;
+    }
+
+    .game-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Modal / Janela do Jogo */
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.85);
+      z-index: 100;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal.active { display: flex; }
+
+    .modal-content {
+      position: relative;
+      width: 90%;
+      max-width: 900px;
+      height: 80vh;
+      background: #000;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      color: #fff;
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+      z-index: 101;
+      background: rgba(0, 0, 0, 0.6);
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    iframe { width: 100%; height: 100%; border: none; }
+  </style>
+</head>
+<body>
+
+  <h1>CLIQUE E JOGUE</h1>
+
+  <div class="game-grid">
+    <!-- Card Exemplo 1 -->
+    <div class="game-card" onclick="playGame('https://html5.gamedistribution.com/rvvAS300/a2155700a0a544c8b21c4b7b2505232b/')">
+      <img src="https://via.placeholder.com/150/ff0055/ffffff?text=Jogo+1" alt="Jogo 1">
+    </div>
+
+    <!-- Adicione quantos cards quiser alterando o link do iframe e a foto -->
+  </div>
+
+  <!-- Player Modal -->
+  <div id="gameModal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeGame()">&times;</span>
+      <iframe id="gameFrame" src="" allowfullscreen></iframe>
+    </div>
+  </div>
+
+  <script>
+    function playGame(url) {
+      document.getElementById('gameFrame').src = url;
+      document.getElementById('gameModal').classList.add('active');
+    }
+
+    function closeGame() {
+      document.getElementById('gameModal').classList.remove('active');
+      document.getElementById('gameFrame').src = ''; // Interrompe o áudio/jogo ao fechar
+    }
+  </script>
+</body>
+</html>
